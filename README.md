@@ -1,4 +1,4 @@
-# Ebay-Dropshipping-Sellers-Finder
+# Ebay-Dropshipping-Seller-Scraper
 
 
 Reference: 
