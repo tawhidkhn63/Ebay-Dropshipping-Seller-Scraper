@@ -1,1 +1,1 @@
-# Ebay-Dropshippers-Finder
+# Ebay-Dropshipping-Sellers-Finder
