@@ -3,6 +3,16 @@
 ## What is Drop Shipping?
 Drop shipping or more accurately, retail arbitrage, is a supply chain management method used widely on eBay. It is the practice of buying an item from other retailers such as Amazon, Walmart, Target, etc then selling the item for a higher price on ebay. This practice can be devided into two parts. First the customer orders an item from a seller and gives seller his/her delivery address. Second, the seller orders the item from a retailer at a lower price and sets the delivery address as the original customer's address. Sellers who participate in drop shipping do not need to physically interact with the product they sell. 
 
+## What is the goal of this scraper project?
+I created this project for the primary reason of saving time. I recently started drop shipping and faced an obstacle, finding what items to sell. I realized I had to see what other drop shippers were selling but finding drop shippers on eBay is a time consuming task. The following steps must be manually done to determine what to sell as a drop shipper:
+
+1. Search any item from any category then find which item in this category is selling the most. 
+2. Check out this item and determine who is selling it. 
+3. If the seller of this item has 100 to 10000 feedback score (transactions completed) then he/she is a possible drop shipper. 
+4. Copy and search the description or title of this item on google
+5. If you find this same item on another retailer for lower price then the seller is definitely a drop shipper. 
+6. Now open seller's profile and find what other high demand items this drop shipper is selling.
+
 
 Reference: 
 - https://omnianalytics.io/2018/08/28/ebay-web-scrape-tutorial/
