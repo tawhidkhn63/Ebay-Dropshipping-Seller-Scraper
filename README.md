@@ -1,4 +1,4 @@
-# eBay-Dropshipping-Seller-Scraper
+# eBay Drop Shipping Seller Scraper
 
 ## What is Drop Shipping?
 Drop shipping or more accurately, retail arbitrage, is a supply chain management method used widely on eBay. It is the practice of buying an item from other retailers such as Amazon, Walmart, Target, etc then selling the item for a higher price on ebay. This practice can be devided into two parts. First the customer orders an item from a seller and gives seller his/her delivery address. Second, the seller orders the item from a retailer at a lower price and sets the delivery address as the original customer's address. Sellers who participate in drop shipping do not need to physically interact with the product they sell. 
