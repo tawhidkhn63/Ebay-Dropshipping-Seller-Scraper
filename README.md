@@ -3,7 +3,7 @@
 ## What is Drop Shipping?
 Drop shipping or more accurately, retail arbitrage, is a supply chain management method used widely on eBay. It is the practice of buying an item from other retailers such as Amazon, Walmart, Target, etc then selling the item for a higher price on ebay. This practice can be devided into two parts. First the customer orders an item from a seller and gives seller his/her delivery address. Second, the seller orders the item from a retailer at a lower price and sets the delivery address as the original customer's address. Sellers who participate in drop shipping do not need to physically interact with the product they sell. 
 
-## What is the goal of this scraper project?
+## What is the goal of this project?
 I created this project for the primary reason of saving time. I recently started drop shipping and faced an obstacle. I had to determine what items to sell on eBay. This means I have to find out what *other* drop shippers are selling. However, finding drop shippers on eBay is a time consuming task, and the following procedure had to be used to determine what to sell as a drop shipper:
 
 1. Search any item from any category then find which item in this category is selling the most. 
@@ -14,6 +14,9 @@ I created this project for the primary reason of saving time. I recently started
 6. Now open the seller's eBay profile and find out what other high demand items they are selling.
 
 This process can take few hours by hand just to identify 5-10 drop shippers. I wanted to automate this procedure and create a tool that can give me a list of drop shippers and what they are selling. As of right now, the tool can perform step 1 of the procedure.
+
+## How will this scraper work?
+I decided to use beautiful soup 4 html parsing package in this project. My program will search an item then download the results page. The downloaded html page will be turned into a bs4 object so I can analyze the webpage. 
 
 
 Reference: 
