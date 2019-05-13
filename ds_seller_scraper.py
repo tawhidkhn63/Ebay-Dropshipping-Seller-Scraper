@@ -27,36 +27,64 @@ def in_demand_item_finder(urls):
     in_demand_items = []
    
     for url in urls:
-	    # Downloads the eBay page for processing
-	    res = requests.get(url)
-	    # Raises an exception error if there's an error downloading the website
-	    res.raise_for_status()
-	    # Creates a BeautifulSoup object for HTML parsing
-	    soup = BeautifulSoup(res.text, 'html.parser')
-	    # Find all items in the results page
-	    items = soup.findAll(attrs = {'class': 's-item'})
+        # Downloads the eBay page for processing
+        res = requests.get(url)
+        # Raises an exception error if there's an error downloading the website
+        res.raise_for_status()
+        # Creates a BeautifulSoup object for HTML parsing
+        soup = BeautifulSoup(res.text, 'html.parser')
+        # Find all items in the results page
+        items = soup.findAll(attrs = {'class': 's-item'})
 
-	    # This loop checks if the item is "hot" i.e. any of the following 
-	    # texts are displayed along with the item:
-	    # number of items remaining, number of buyers watching the item, 
-	    # item is on sale, number of items sold, etc
-	    # We stop once we find 20 "hot" items
-	    x = 0
-	    for item in items:
-	        if(x == 20):
-	            break
-	        if(item.find("span", {"class": "BOLD NEGATIVE"})):
-	            num_sold = item.find("span", {"class": "BOLD NEGATIVE"}).get_text()
-	            # We only look for high demand items that display how many sold next to it
-	            if((num_sold.find('Sold') != -1) or (num_sold.find('Watching') != -1)):
-	                print("num sold/watching: " + num_sold)
-	                title = item.find("a", {"class": "s-item__link"}).get_text()
-	                link = item.find('a', href=True)
-	                in_demand_items.append(link['href'])
-	                x += 1
+        # This loop checks if the item is "hot" i.e. any of the following 
+        # texts are displayed along with the item:
+        # number of items remaining, number of buyers watching the item, 
+        # item is on sale, number of items sold, etc
+        # We stop once we find 20 "hot" items
+        x = 0
+        for item in items:
+            if(x == 3):
+                break
+            if(item.find("span", {"class": "BOLD NEGATIVE"})):
+                num_sold = item.find("span", {"class": "BOLD NEGATIVE"}).get_text()
+                # We only look for high demand items that display how many sold next to it
+                if(num_sold.find('Sold') != -1):
+                    print("num sold/watching: " + num_sold)
+                    title = item.find("a", {"class": "s-item__link"}).get_text()
+                    link = item.find('a', href=True)
+                    in_demand_items.append(link['href'])
+                    #print(link['href'] + '\n' + title)
+                    x += 1
 
     print("In demand items found.")
     return in_demand_items
+
+# Opens a hot item and determines feedback score of seller
+def eBay_item_checker(hot_items):
+    x = 0
+    for item_link in hot_items:
+        if(x == 3):
+            break
+        # Downloads the eBay page for processing
+        res = requests.get(item_link)
+        # Raises an exception error if there's an error downloading the website
+        res.raise_for_status()
+        # Creates a BeautifulSoup object for HTML parsing
+        soup = BeautifulSoup(res.text, 'html.parser')
+        
+        # Finds the feedback score of the seller
+        seller_info = soup.find(attrs = {'class': 'mbg-l'})    
+        feedback_score = seller_info.find("span", title=True)
+        feedback_score = feedback_score['title'].lstrip("feedback score:")
+        if((int(feedback_score) > 100) and (int(feedback_score) > 10000)):
+            #other_retailer_checker(item_link)
+            #add_seller(item_link)
+        print(feedback_score)
+        x += 1
+
+    print("Hot items reviewed.")
+    return hot_items
         
 links = make_urls(item_list)
-in_demand_item_finder(links)
+hot_items = in_demand_item_finder(links)
+eBay_item_checker(hot_items)
