@@ -60,6 +60,7 @@ def in_demand_item_finder(urls):
     return in_demand_items
 
 def other_retailer_checker(item_link):
+	other_retailer_links = []
     # Downloads the eBay page for processing
     res = requests.get(item_link)
     # Raises an exception error if there's an error downloading the website
@@ -67,7 +68,6 @@ def other_retailer_checker(item_link):
     # Creates a BeautifulSoup object for HTML parsing
     soup = BeautifulSoup(res.text, 'html.parser')
     
-
 
 # Opens a hot item and determines feedback score of seller
 def eBay_item_checker(hot_items):
@@ -86,6 +86,8 @@ def eBay_item_checker(hot_items):
         seller_info = soup.find(attrs = {'class': 'mbg-l'})    
         feedback_score = seller_info.find("span", title=True)
         feedback_score = feedback_score['title'].lstrip("feedback score:")
+
+
         if((int(feedback_score) > 100) and (int(feedback_score) > 10000)):
             other_retailer_checker(item_link)
             #add_seller(item_link)
