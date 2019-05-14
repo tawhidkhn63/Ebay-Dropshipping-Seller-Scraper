@@ -60,7 +60,7 @@ def in_demand_item_finder(urls):
     return in_demand_items
 
 def other_retailer_checker(item_link):
-	
+	other_retailer_links = []
     # Downloads the eBay page for processing
     res = requests.get(item_link)
     # Raises an exception error if there's an error downloading the website
