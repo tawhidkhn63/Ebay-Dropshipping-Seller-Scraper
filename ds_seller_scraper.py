@@ -7,6 +7,14 @@ import re
 #             "bluetooth headphones", "coffee machine", "lamp", "fridge", "wardrobe"]
 item_list = ["Mountain Bike"]
 
+def soup_creator(url):
+	# Downloads the eBay page for processing
+    res = requests.get(url)
+    # Raises an exception error if there's an error downloading the website
+    res.raise_for_status()
+    # Creates a BeautifulSoup object for HTML parsing
+    return BeautifulSoup(res.text, 'html.parser')
+
 # Returns a list of urls that search eBay for an item
 def make_urls(names):
     # eBay url that can be modified to search for a specific item on eBay
@@ -38,12 +46,7 @@ def in_demand_item_finder(urls):
     in_demand_items = []
    
     for url in urls:
-        # Downloads the eBay page for processing
-        res = requests.get(url)
-        # Raises an exception error if there's an error downloading the website
-        res.raise_for_status()
-        # Creates a BeautifulSoup object for HTML parsing
-        soup = BeautifulSoup(res.text, 'html.parser')
+        soup = soup_creator(url)
         # Find all items in the results page
         items = soup.findAll(attrs = {'class': 's-item'})
 
@@ -71,13 +74,7 @@ def in_demand_item_finder(urls):
     return in_demand_items
 
 def description_searcher(item_link):
-    other_retail_links = []
-    # Downloads the eBay page for processing
-    res = requests.get(item_link)
-    # Raises an exception error if there's an error downloading the website
-    res.raise_for_status()
-    # Creates a BeautifulSoup object for HTML parsing
-    soup = BeautifulSoup(res.text, 'html.parser')
+    soup = soup_creator(url)
     
 
 def other_retailer_checker(item_link):
@@ -95,13 +92,7 @@ def eBay_item_checker(hot_items):
     for item_link in hot_items:
         if(x == 3):
             break
-        # Downloads the eBay page for processing
-        res = requests.get(item_link)
-        # Raises an exception error if there's an error downloading the website
-        res.raise_for_status()
-        # Creates a BeautifulSoup object for HTML parsing
-        soup = BeautifulSoup(res.text, 'html.parser')
-        
+        soup = soup_creator(item_link)       
         # Finds the feedback score of the seller
         seller_info = soup.find(attrs = {'class': 'mbg-l'})    
         feedback_score = seller_info.find("span", title=True)
