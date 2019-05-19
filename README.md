@@ -13,7 +13,7 @@ I created this project for the primary reason of saving time. I recently started
 5. If you find this same item on another retailer for lower price then the seller is definitely a drop shipper. 
 6. Now open the seller's eBay profile and find out what other high demand items they are selling.
 
-This process can take few hours by hand just to identify 5-10 drop shippers. I wanted to automate this procedure and create a tool that can give me a list of drop shippers and what they are selling. As of right now, the tool can perform step 1 of the procedure.
+This process can take few hours by hand just to identify 5-10 drop shippers. I wanted to automate this procedure and create a tool that can give me a list of drop shippers and what they are selling. As of right now, the tool can perform step 4 of the procedure.
 
 ## How will this scraper work?
 I decided to use beautiful soup 4 html parsing package in this project. My program will search an item then download the results page. The downloaded html page will be turned into a bs4 object so I can analyze the webpage. 
