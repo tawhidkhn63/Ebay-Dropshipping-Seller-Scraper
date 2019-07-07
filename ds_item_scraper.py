@@ -100,27 +100,28 @@ def recently_sold(purchase_history_links):
     for purchase_history_link in purchase_history_links:
         x = 0
         soup = soup_creator(purchase_history_link)
-        table = soup.find('th', text=re.compile('Date of Purchase')).find_parent('table')
-        # checks the date of each time this item was purchased
-        for row in table.find_all('tr')[1:]:
-            # output item link if this item sold at least 4 times
-            if(x == 4):
-                item_link = soup.find('div', attrs={'class' : 'itemTitle'})
-                item_link = item_link.find('a', href=True)
-                print(item_link['href'])
-                break
-            _,_, price_cell, qty_cell, date_cell, *_ = row.find_all('td')
-            purchase_date = date_cell.text.strip().split()[0]
-            purchase_month = int(month_converter(purchase_date.split('-')[0]))
-            purchase_year = int(purchase_date.split('-')[2])
-            purchase_day = int(purchase_date.split('-')[1])
-            # check if this item was sold in past month
-            if(purchase_year == int(current_year)):
-                if(purchase_month == int(current_month)):
-                    x+=1
-                elif(purchase_month == int(current_month)-1):
-                    if(purchase_day >= int(current_day)):
+        if(soup.find('th', text=re.compile('Date of Purchase'))):
+            table = soup.find('th', text=re.compile('Date of Purchase')).find_parent('table')
+            # checks the date of each time this item was purchased
+            for row in table.find_all('tr')[1:]:
+                # output item link if this item sold at least 4 times
+                if(x == 4):
+                    item_link = soup.find('div', attrs={'class' : 'itemTitle'})
+                    item_link = item_link.find('a', href=True)
+                    print(item_link['href'])
+                    break
+                _,_, price_cell, qty_cell, date_cell, *_ = row.find_all('td')
+                purchase_date = date_cell.text.strip().split()[0]
+                purchase_month = int(month_converter(purchase_date.split('-')[0]))
+                purchase_year = int(purchase_date.split('-')[2])
+                purchase_day = int(purchase_date.split('-')[1])
+                # check if this item was sold in past month
+                if(purchase_year == int(current_year)):
+                    if(purchase_month == int(current_month)):
                         x+=1
+                    elif(purchase_month == int(current_month)-1):
+                        if(purchase_day >= int(current_day)):
+                            x+=1
 
 seller_item_for_sale = make_urls(sellers_list)
 items = item_link_finder(seller_item_for_sale)
